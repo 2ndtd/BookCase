@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">BookCase</string>
+    <string-array name="booktitle">
+        <item>"Harry Potter and the Sorcerer's Stone"</item>
+        <item>"Harry Potter and the Chamber of Secrets"</item>
+        <item>"Harry Potter and the Prisoner of Azkaban"</item>
+        <item>"Harry Potter and the Goblet of Fire"</item>
+        <item>"Harry Potter and the Order of the Phoenix"</item>
+        <item>"Harry Potter and the Half-Blood Prince"</item>
+        <item>"Harry Potter and the Deathly Hallows"</item>
+        <item>"Three Little Pigs"</item>
+        <item>"Jack and the Beanstalk"</item>
+        <item>"The Little Red Riding Hood"</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
