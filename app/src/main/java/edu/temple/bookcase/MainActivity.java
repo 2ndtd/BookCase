@@ -1,10 +1,13 @@
 package edu.temple.bookcase;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
+/**
+ * CIS 3515 - Lab 7 BookCase
+ * Toi Do 11/1/2019
+ */
 public class MainActivity extends AppCompatActivity implements BookListFragment.OnBookInteractionListener {
 
     boolean singlePane;

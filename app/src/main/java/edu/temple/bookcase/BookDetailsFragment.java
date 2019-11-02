@@ -1,17 +1,16 @@
 package edu.temple.bookcase;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
-
+/**
+ * CIS 3515 - Lab 7 BookCase
+ * Toi Do 11/1/2019
+ */
 public class BookDetailsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,11 +21,9 @@ public class BookDetailsFragment extends Fragment {
     private BookListFragment.OnBookInteractionListener mListener;
 
     public BookDetailsFragment() {
-        // Required empty public constructor
     }
 
 
-    // TODO: Rename and change types and number of parameters
     public static BookDetailsFragment newInstance(String book) {
         BookDetailsFragment fragment = new BookDetailsFragment();
         Bundle args = new Bundle();
@@ -54,7 +51,6 @@ public class BookDetailsFragment extends Fragment {
     }
 
     public void displayBook(String book){
-
         textView.setText(book);
     }
 
