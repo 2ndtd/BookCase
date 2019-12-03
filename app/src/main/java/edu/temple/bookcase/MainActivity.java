@@ -1,8 +1,13 @@
 package edu.temple.bookcase;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,13 +25,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-/**
- * CIS 3515 - Lab 8 BookCase
- * Toi Do 11/15/2019
- */
-public class MainActivity extends AppCompatActivity implements BookListFragment.OnBookInteractionListener {
+import edu.temple.audiobookplayer.AudiobookService;
 
-    boolean singlePane;
+/**
+ * CIS 3515 - Lab 9 BookCase-Audio
+ * Toi Do 12/2/2019
+ */
+public class MainActivity extends AppCompatActivity implements BookListFragment.OnBookInteraction, BookDetailsFragment.OnBookInteractionListener {
+
+    boolean singlePane, connected;
     ViewPagerFragment viewPagerFragment;
     BookDetailsFragment bookDetailsFragment;
     BookListFragment bookListFragment;
@@ -35,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     JSONArray bookArray;
     String info;
     ArrayList<Books> listBook;
+    AudiobookService.MediaControlBinder mediaControlBinder;
 
 
     @Override
@@ -43,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         setContentView(R.layout.activity_main);
 
         infoText = findViewById(R.id.infoText);
+        infoText.clearFocus();
         button = findViewById(R.id.searchButton);
         listBook = new ArrayList<>();
 
@@ -51,11 +60,14 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         bookListFragment = new BookListFragment();
         viewPagerFragment = new ViewPagerFragment();
 
+        bindService(new Intent(this, AudiobookService.class), serviceConnection, BIND_AUTO_CREATE);
         if(!singlePane){
             addFragment(bookListFragment, R.id.container1);
             addFragment(bookDetailsFragment, R.id.container2);
         } else {
+            addFragment(bookDetailsFragment, R.id.container3);
             addFragment(viewPagerFragment, R.id.container3);
+
         }
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +137,57 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     @Override
     public void onBookInteraction(Books bookObj) {
         bookDetailsFragment.displayBook(bookObj);
+    }
+
+    @Override
+    public void playAudio(int id) {
+        mediaControlBinder.play(id);
+    }
+
+    @Override
+    public void pauseAudio() {
+        mediaControlBinder.pause();
+    }
+
+    @Override
+    public void stopAudio() {
+        mediaControlBinder.stop();
+    }
+
+    @Override
+    public void seekAudio(int position) {
+        mediaControlBinder.seekTo(position);
+    }
+
+    @Override
+    public void setProgress(Handler progressHandler) {
+        mediaControlBinder.setProgressHandler(progressHandler);
+    }
+
+
+    ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            connected = true;
+            Log.d("ServiceConnection: ","Connected");
+            mediaControlBinder = (AudiobookService.MediaControlBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Log.d("ServiceConnection: ","Disconnected");
+            connected = false;
+            mediaControlBinder = null;
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(connected) {
+            unbindService(serviceConnection);
+            connected = false;
+        }
     }
 }
 

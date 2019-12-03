@@ -8,8 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="401dp"
+        android:layout_height="724dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -25,29 +25,26 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="536dp"
             android:text="Search for Book"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.13" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/infoText"
-            android:layout_width="294dp"
-            android:layout_height="79dp"
-            android:layout_marginStart="91dp"
-            android:layout_marginEnd="91dp"
-            android:layout_marginBottom="25dp"
+            android:layout_width="334dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
             android:ems="10"
             android:hint="Enter Book Info"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toTopOf="@+id/searchButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.069" />
+            app:layout_constraintVertical_bias="0.934" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

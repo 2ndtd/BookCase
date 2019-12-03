@@ -11,19 +11,22 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
+import edu.temple.audiobookplayer.AudiobookService;
+
 /**
- * CIS 3515 - Lab 8 BookCase
- * Toi Do 11/15/2019
+ * CIS 3515 - Lab 9 BookCase-Audio
+ * Toi Do 12/2/2019
  */
 public class BookListFragment extends Fragment {
 
     private ListView listView;
-    private Context c;
+    private Context context;
     ArrayList<Books> listBook;
     private Books book;
     private BookAdapter adapter;
 
-    private OnBookInteractionListener mListener;
+    private OnBookInteraction mListener;
+    AudiobookService.MediaControlBinder mediaControlBinder;
     public BookListFragment() {
     }
 
@@ -43,21 +46,21 @@ public class BookListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnBookInteractionListener) {
-            mListener = (OnBookInteractionListener) context;
+        if (context instanceof OnBookInteraction) {
+            mListener = (OnBookInteraction) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnBookInteractionListener");
+                    + " must implement OnBookInteraction");
         }
-        this.c = context;
+        this.context = context;
     }
 
-    public interface OnBookInteractionListener {
+    public interface OnBookInteraction{
         void onBookInteraction(Books bookObj);
     }
 
     public void getBooks(final ArrayList<Books> bookArray){
-        adapter = new BookAdapter(c, bookArray);
+        adapter = new BookAdapter(context, bookArray);
         adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,7 +68,7 @@ public class BookListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 book = bookArray.get(position);
-                ((OnBookInteractionListener) c).onBookInteraction(book);
+                ((OnBookInteraction) context).onBookInteraction(book);
             }
         });
 

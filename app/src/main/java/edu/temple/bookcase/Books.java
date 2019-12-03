@@ -6,11 +6,11 @@ import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 /**
- * CIS 3515 - Lab 8 BookCase
- * Toi Do 11/15/2019
+ * CIS 3515 - Lab 9 BookCase-Audio
+ * Toi Do 12/2/2019
  */
 public class Books implements Parcelable {
-    private int id;
+    private int id, duration;
     private String title, author, coverURL, published;
 
     public Books(JSONObject jsonBook) throws JSONException {
@@ -19,6 +19,7 @@ public class Books implements Parcelable {
         this.author = jsonBook.getString("author");
         this.published = jsonBook.getString("published");
         this.coverURL = jsonBook.getString("cover_url");
+        this.duration = jsonBook.getInt("duration");
     }
 
     protected Books(Parcel in) {
@@ -71,8 +72,16 @@ public class Books implements Parcelable {
 
     public void setCoverURL(String coverURL) {
         this.coverURL = coverURL;
-    }public String getCoverURL() {
+    }
+    public String getCoverURL() {
         return coverURL;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+    public int getDuration() {
+        return duration;
     }
 
 

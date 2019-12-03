@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 /**
- * CIS 3515 - Lab 8 BookCase
- * Toi Do 11/15/2019
+ * CIS 3515 - Lab 9 BookCase-Audio
+ * Toi Do 12/2/2019
  */
 public class BookAdapter extends BaseAdapter {
     private Context context;

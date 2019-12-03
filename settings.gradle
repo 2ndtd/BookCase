@@ -1,2 +1,2 @@
-include ':app', ':android-support-v4'
+include ':app', ':android-support-v4', ':audiobook-player'
 rootProject.name='BookCase'

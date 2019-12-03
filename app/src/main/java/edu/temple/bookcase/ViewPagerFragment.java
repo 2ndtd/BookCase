@@ -13,8 +13,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 /**
- * CIS 3515 - Lab 8 BookCase
- * Toi Do 11/15/2019
+ * CIS 3515 - Lab 9 BookCase-Audio
+ * Toi Do 12/2/2019
  */
 public class ViewPagerFragment extends Fragment {
 
@@ -25,6 +25,7 @@ public class ViewPagerFragment extends Fragment {
     private BookDetailsFragment newFragment;
     private Books bookObj;
     private ArrayList<Books> books;
+    private ArrayList<BookDetailsFragment> bookDetailsFragments;
 
 
     @Override
@@ -41,12 +42,12 @@ public class ViewPagerFragment extends Fragment {
         books = new ArrayList<>();
         viewPager = view.findViewById(R.id.viewPager);
         viewPager.setAdapter(pagerAdapter);
+        bookDetailsFragments = new ArrayList<>();
 
         return view;
     }
 
-    void addPager(final ArrayList bookArray){
-        books.clear();
+    void addPager(final ArrayList bookArray){ books.clear();
         books.addAll(bookArray);
         for(int i = 0; i < books.size(); i++) {
             bookObj = books.get(i);
