@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
@@ -84,6 +83,7 @@ public class BookDetailsFragment extends Fragment {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                ((OnBookInteractionListener) context).playAudio(bookObj.getId());
                ((OnBookInteractionListener) context).setProgress(progressHandler);
             }
@@ -98,7 +98,7 @@ public class BookDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 seekBar.setProgress(0);
-                progressText.setText("0 s");
+                progressText.setText("0s");
                 ((OnBookInteractionListener) context).stopAudio();
             }
         });
@@ -125,7 +125,7 @@ public class BookDetailsFragment extends Fragment {
 
     Handler progressHandler = new Handler(new Handler.Callback() {
         @Override
-        public boolean handleMessage(@NonNull Message msg) {
+        public boolean handleMessage(Message msg) {
             updateSeekbar(msg.what);
             return false;
         }
