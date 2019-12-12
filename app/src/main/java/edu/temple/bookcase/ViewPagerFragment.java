@@ -13,8 +13,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 /**
- * CIS 3515 - Lab 9 BookCase-Audio
- * Toi Do 12/2/2019
+ * CIS 3515 - Lab 10 BookCase-Audio
+ * Toi Do 12/12/2019
  */
 public class ViewPagerFragment extends Fragment {
 

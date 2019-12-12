@@ -6,8 +6,8 @@ import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 /**
- * CIS 3515 - Lab 9 BookCase-Audio
- * Toi Do 12/2/2019
+ * CIS 3515 - Lab 10 BookCase-Audio
+ * Toi Do 12/12/2019
  */
 public class Books implements Parcelable {
     public int id, duration;
