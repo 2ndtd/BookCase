@@ -19,11 +19,11 @@ import edu.temple.audiobookplayer.AudiobookService;
  */
 public class BookListFragment extends Fragment {
 
-    private ListView listView;
-    private Context context;
+    ListView listView;
+    Context context;
     ArrayList<Books> listBook;
-    private Books book;
-    private BookAdapter adapter;
+    Books book;
+    BookAdapter adapter;
 
     private OnBookInteraction mListener;
     AudiobookService.MediaControlBinder mediaControlBinder;

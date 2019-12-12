@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -12,8 +13,8 @@ import java.util.ArrayList;
  * Toi Do 12/2/2019
  */
 public class BookAdapter extends BaseAdapter {
-    private Context context;
-    private ArrayList<Books> info ;
+    Context context;
+    ArrayList<Books> info ;
 
     BookAdapter(Context context, ArrayList<Books> info) {
         this.context = context;
@@ -43,5 +44,8 @@ public class BookAdapter extends BaseAdapter {
         textView.setTextSize(30);
 
         return textView;
+    }
+    public Filter getFilter() {
+        return null;
     }
 }

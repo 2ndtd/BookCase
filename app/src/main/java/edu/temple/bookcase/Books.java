@@ -10,8 +10,8 @@ import org.json.JSONObject;
  * Toi Do 12/2/2019
  */
 public class Books implements Parcelable {
-    private int id, duration;
-    private String title, author, coverURL, published;
+    public int id, duration;
+    public String title, author, coverURL, published;
 
     public Books(JSONObject jsonBook) throws JSONException {
         this.id = jsonBook.getInt("book_id");

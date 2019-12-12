@@ -3,11 +3,11 @@ package edu.temple.bookcase;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     String info;
     ArrayList<Books> listBook;
     AudiobookService.MediaControlBinder mediaControlBinder;
+    String savedSearch;
+    SharedPreferences sharedPreferences;
 
 
     @Override
@@ -69,14 +72,22 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             addFragment(viewPagerFragment, R.id.container3);
 
         }
+        sharedPreferences = getPreferences(MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 info = infoText.getText().toString();
+                editor.putString("SEARCH", info);
+                editor.apply();
                 searchBook(info);
             }
         });
+        savedSearch = sharedPreferences.getString("SEARCH", "");
+        searchBook(savedSearch);
+
 
     }
 
@@ -134,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             return false;
         }
     });
+
     @Override
     public void onBookInteraction(Books bookObj) {
         bookDetailsFragment.displayBook(bookObj);
@@ -142,6 +154,11 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     @Override
     public void playAudio(int id) {
         mediaControlBinder.play(id);
+    }
+
+    @Override
+    public void playBookFile(File file) {
+        mediaControlBinder.play(file);
     }
 
     @Override
@@ -163,19 +180,27 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     public void setProgress(Handler progressHandler) {
         mediaControlBinder.setProgressHandler(progressHandler);
     }
+    @Override
+    public void playAudioPosition(int id, int position) {
+        mediaControlBinder.play(id, position);
+    }
+
+    @Override
+    public void playAudioFilePosition(File file, int position) {
+        mediaControlBinder.play(file, position);
+    }
 
 
     ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            connected = true;
-            Log.d("ServiceConnection: ","Connected");
             mediaControlBinder = (AudiobookService.MediaControlBinder) service;
+            connected = true;
+
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Log.d("ServiceConnection: ","Disconnected");
             connected = false;
             mediaControlBinder = null;
         }
